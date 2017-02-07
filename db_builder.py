@@ -16,12 +16,22 @@ for peep in pdata:
     d['name'] = peep['name']
     d['age'] = int(peep['age'])
     d['id'] = int(peep['id'])
+    d['courses'] = {}
     for course in cdata:
         if course['id'] == peep['id']:
-            d[course['code']] = int(course['mark'])
+            d['courses'][course['code'] = int(course['mark'])
     g.seek(0)
     #print d
     c.insert_one(d)
 
 f.close()
 g.close()
+
+for student in c.students:
+    sum = 0
+    for key,value in student['courses']:
+        sum += value
+    avg = sum*1.0 / (len(student['courses']))
+    print "Name: %s\nID: %d\nAverage: %f\n"%(student['name'], student['id'], avg)
+                         
+
