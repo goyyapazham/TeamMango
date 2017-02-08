@@ -33,5 +33,19 @@ for student in c.students:
         sum += value
     avg = sum*1.0 / (len(student['courses']))
     print "Name: %s\nID: %d\nAverage: %f\n"%(student['name'], student['id'], avg)
-                         
 
+c = db.teachers
+h = open('teachers.csv', 'r')
+tdata = csv.DictReader(h)
+# wrote something up didn't get a chance to test it
+for teacher in tdata:
+    d = {}
+    d['name'] = teacher['name']
+    d['period'] = teacher['period']
+    d['code'] = teacher['code']
+    d['students'] = db.students.find({courses.teacher['code'] : {$exists : true}})
+    c.insert_one(d)
+                         
+h.close()
+    
+    
